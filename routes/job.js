@@ -24,7 +24,7 @@ async function generateLeaderboard(data) {
     for (let m = 0; m < projects.length; m++) {
         await axios.get(`https://api.github.com/search/issues?q=repo:${projects[m]}+is:pr+label:${identifyingLabel}+is:merged&per_page=100`, {
             headers: {
-                Authorization: 'token ' + "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"
+                Authorization: 'token ' + process.env.GITHUB_TOKEN
             }
         }).then(async function (response) {
             if (response.data.items && response.data.items.length > 0) {
@@ -63,7 +63,7 @@ async function generateLeaderboard(data) {
                         console.log("Page: " + i);
                         let paginated = await axios.get(`https://api.github.com/search/issues?q=repo:${projects[m]}+is:pr+label:${identifyingLabel}+is:merged&per_page=100&page=${i}`, {
                             headers: {
-                                Authorization: 'token ' + "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"
+                                Authorization: 'token ' + process.env.GITHUB_TOKEN
                             }
                         }).then(async function (response) {
                             console.log("*****" + response.data.items.length);
