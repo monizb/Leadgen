@@ -3,12 +3,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
+require('dotenv').config();
 
 
 //connect to mongodb
-mongoose.connect('mongodb+srv://monishb:Eti%4012345@cluster0.vbsad.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+mongoose.connect(`mongodb+srv://${process.env.DBNAME}:${process.env.PASSWORD}@cluster0.vbsad.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('Connected to database');
-}).catch(() => {
+}).catch((err) => {
+    console.log('Error: ', err.message);
     console.log('Connection failed');
 });
 
